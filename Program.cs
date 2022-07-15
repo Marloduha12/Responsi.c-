@@ -8,13 +8,9 @@ namespace ProjectMahasiswa
     class Program
     {
         // deklarasi objek collection untuk menampung objek mahasiswa
-        static List<string> daftarMahasiswa = new List<string>();
-        int[] nim = new int[25];
-        string[] nama = new string[25];
-        string[] jK = new string[25];
-        double[] ipk = new double[25];
+        Mahasiswa Mahasiswa = new Mahasiswa();
 
-        public static int i { get; private set; }
+        static List<Mahasiswa> daftarMahasiswa = new List<Mahasiswa>();
 
         static void Main(string[] args)
         {
@@ -37,7 +33,8 @@ namespace ProjectMahasiswa
                         TampilMahasiswa();
                         break;
 
-                    case 3: // keluar dari program
+                    case 3:
+                        System.Environment.Exit(0);
                         return;
 
                     default:
@@ -49,27 +46,53 @@ namespace ProjectMahasiswa
         static void TampilMenu()
         {
             Console.Clear();
-
+            Console.Write("\nPilih Menu Aplikasi");
+            Console.Write("\n");
+            Console.Write("\n1. Tambah Mahasiswa");
+            Console.Write("\n2. Tampilkan Mahasiswa");
+            Console.Write("\n3. Keluar\n");
             // PERINTAH: lengkapi kode untuk menampilkan menu
-            Console.WriteLine("Pilih Menu Aplikasi");
-            Console.WriteLine("\n1. Tambah Mahasiswa");
-            Console.WriteLine("2. Tampilkan Mahasiwa");
-            Console.WriteLine("3. Keluar");
         }
 
         static void TambahMahasiswa()
         {
             Console.Clear();
+            Mahasiswa Mahasiswa = new Mahasiswa();
 
-            // PERINTAH: lengkapi kode untuk menambahkan objek mahasiswa ke dalam collection\
-            Console.Write("NIM = ");
-            Mahasiswa.nim[i] = Console.ReadLine();
-            Console.Write("Nama = ");
-            Mahasiswa.nama[i] = Console.ReadLine();
-            Console.Write("NIM = ");
-            Mahasiswa.jK[i] = Console.ReadLine();
-            Console.Write("Nama = ");
-            Mahasiswa.ipk[i] = Console.ReadLine();
+            Console.Write("NIM: ");
+            Mahasiswa.nim = Console.ReadLine();
+            Console.Write("Nama: ");
+            Mahasiswa.nama = Console.ReadLine();
+            Console.Write("Jenis Kelamin [L/P] : ");
+            Mahasiswa.Kelamin = Console.ReadLine();
+            if (Mahasiswa.Kelamin == "L")
+            {
+                Mahasiswa.Kelamin = "Laki-Laki";
+            }
+            else if (Mahasiswa.Kelamin == "P")
+            {
+                Mahasiswa.Kelamin = "Perempuan";
+            }
+
+            Console.Write("IPK : ");
+            Mahasiswa.total = Console.ReadLine();
+
+
+
+            daftarMahasiswa.Add(Mahasiswa);
+
+            // PERINTAH: lengkapi kode untuk menambahkan objek mahasiswa ke dalam collection
+
+            Console.WriteLine("\nTekan ENTER untuk kembali ke menu");
+            Console.ReadKey();
+        }
+
+        static void HapusMahasiswa()
+        {
+            Console.Clear();
+
+
+            // PERINTAH: lengkapi kode untuk menghapus objek mahasiswa dari dalam collection
 
             Console.WriteLine("\nTekan ENTER untuk kembali ke menu");
             Console.ReadKey();
@@ -78,11 +101,19 @@ namespace ProjectMahasiswa
         static void TampilMahasiswa()
         {
             Console.Clear();
+            Console.WriteLine("Data Mahasiswa\n");
+            int no = 1;
 
-            // PERINTAH: lengkapi kode untuk menampilkan daftar mahasiswa yang ada di dalam collection
+            foreach (Mahasiswa mahasiswa in daftarMahasiswa)
+            {
 
-            Console.WriteLine("\nTekan enter untuk kembali ke menu");
+                Console.WriteLine("{0}. {1}, {2}, {3}, {4}", no, mahasiswa.nim, mahasiswa.nama, mahasiswa.Kelamin, mahasiswa.total);
+                no++;
+            }
+            Console.WriteLine();
+            Console.WriteLine("Tekan enter untuk kembali ke menu");
             Console.ReadKey();
         }
+
     }
 }
